@@ -117,9 +117,14 @@ if ! shopt -oq posix; then
 fi
 
 #Starting here is my own program:
+# Alias
 alias ls='ls --color=auto'
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias i3="vim ~/.config/regolith/i3/config"
 alias r='ranger'
 alias python='python3'
+
+# Setting my default text editor to be vim
+export VISUAL=vim
+export EDITOR="$VISUAL"
