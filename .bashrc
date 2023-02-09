@@ -121,10 +121,25 @@ fi
 alias ls='ls --color=auto'
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
-alias i3="vim ~/.config/regolith/i3/config"
-alias r='ranger'
-alias python='python3'
 
 # Setting my default text editor to be vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
+
+alias e="explorer.exe ."
+
+removecontainers() {
+    docker stop $(docker ps -aq)
+    docker rm $(docker ps -aq)
+}
+
+armageddon() {
+    removecontainers
+    docker network prune -f
+    docker rmi -f $(docker images --filter dangling=true -qa)
+    docker volume rm $(docker volume ls --filter dangling=true -q)
+    docker rmi -f $(docker images -qa)
+}
+
+
+alias docker_kill_all=armageddon
